@@ -1,7 +1,7 @@
 # RDM
 Rotation Document Model
 
-In this repository we provide *C* and *Python* code to reproduce experiments and generate embeddings proposed in our paper.
+In this repository we provide *C* and *Python* code to generate embeddings proposed in our paper.
 [[paper]](https://aclanthology.org/2021.findings-acl.146/)
 
 ![](rdm22.png)
