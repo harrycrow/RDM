@@ -20,9 +20,7 @@ Python version:
 - python >= 3.6
 - [pytorch](http://pytorch.org/) >= 1.6
 - numpy
-- scipy
-- matplotlib
-- scikit-image
+- tqdm
 - jupyter
 
 # Parameters
