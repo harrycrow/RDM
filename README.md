@@ -4,7 +4,7 @@ Rotation Document Model
 In this repository we provide *C* and *Python* code to reproduce experiments and generate embeddings proposed in our paper.
 [[paper]](https://aclanthology.org/2021.findings-acl.146/)
 
-![](data/rdm22.png)
+![](rdm22.png)
 
 # Install
 
