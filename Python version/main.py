@@ -4,7 +4,7 @@ import time
 import codecs
 import math
 from torch.utils.data import DataLoader, TensorDataset, RandomSampler, ConcatDataset
-from optim import ProjAdagrad, Radagrad, RNGD
+from optim import ProjAdagrad, Radagrad
 from model import *
 
 
