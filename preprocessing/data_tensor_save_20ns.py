@@ -6,27 +6,16 @@ from model import *
 from sklearn.feature_extraction.text import CountVectorizer
 
 
-def translate_triple(dataset):
-    ent2id = []
-    rel2id = []
-    with open(dataset+'/entities.txt') as f:
-        for i, line in enumerate(f):
-            ent2id.append(line.split()[0].strip())
-    with open(dataset+'/relations.txt') as f:
-        for i, line in enumerate(f):
-            rel2id.append(line.split()[0].strip())
-    return ent2id, rel2id
-
 def train(tfboard=False):
     window_max = 5
     torch.manual_seed(42)
     if tfboard:
         writer = SummaryWriter('runs/fb15k')
-    trainset, _ = fetch_20newsgroups(data_home='/Users/igorvorona/PycharmProjects/RDM/20_newsgroups',
+    trainset, _ = fetch_20newsgroups(data_home='20_newsgroups',
                                                       subset='train', categories=None,
                                         shuffle=True, random_state=42, remove=(),
                                         download_if_missing=True, return_X_y=True)
-    testset, _ = fetch_20newsgroups(data_home='/Users/igorvorona/PycharmProjects/RDM/20_newsgroups',
+    testset, _ = fetch_20newsgroups(data_home='20_newsgroups',
                                                      subset='test', categories=None,
                                         shuffle=True, random_state=42, remove=(),
                                         download_if_missing=True, return_X_y=True)
@@ -103,12 +92,12 @@ def train(tfboard=False):
     print(words_entropy)
     print(len(trainset))
     print(len(words_freq))
-    with codecs.open('data_tensors/20ns_params', mode='w', encoding='ascii') as f:
+    with codecs.open('20ns_params', mode='w', encoding='ascii') as f:
         f.write('Words Entropy: ' + str(words_entropy) + '\n')
         f.write('Num docs: ' + str(len(trainset)) + '\n')
         f.write('Num words: ' + str(len(words_freq)) + '\n')
     for window_size in range(window_max):
-        with codecs.open('data_tensors/20ns' + str(2 + window_size), mode='w', encoding='ascii') as f:
+        with codecs.open('20ns' + str(2 + window_size), mode='w', encoding='ascii') as f:
             for i in range(len(d_set[window_size])):
                 f.write(str(d_set[window_size][i]))
                 for s in s_set[window_size][i]:
