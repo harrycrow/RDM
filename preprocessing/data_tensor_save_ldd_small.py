@@ -8,17 +8,6 @@ from model import *
 from sklearn.feature_extraction.text import CountVectorizer
 
 
-def translate_triple(dataset):
-    ent2id = []
-    rel2id = []
-    with open(dataset+'/entities.txt') as f:
-        for i, line in enumerate(f):
-            ent2id.append(line.split()[0].strip())
-    with open(dataset+'/relations.txt') as f:
-        for i, line in enumerate(f):
-            rel2id.append(line.split()[0].strip())
-    return ent2id, rel2id
-
 def train(tfboard=False):
     min_count = 5
     skip = 1e-5  # 0.001
@@ -27,7 +16,7 @@ def train(tfboard=False):
     if tfboard:
         writer = SummaryWriter('runs/fb15k')
 
-    basepath = '/Users/igorvorona/Desktop/Long document dataset'
+    basepath = 'Long document dataset'
     labels = """cs.cv
     cs.CE
     math.ST
@@ -162,7 +151,7 @@ def train(tfboard=False):
     print(words_entropy)
     print(len(trainset))
     print(len(words_freq))
-    with codecs.open('data_tensors/ldd_small_params', mode='w', encoding='utf-8') as f:
+    with codecs.open('ldd_small_params', mode='w', encoding='utf-8') as f:
         f.write('Words Entropy: ' + str(words_entropy) + '\n')
         f.write('Num docs: ' + str(len(trainset)) + '\n')
         f.write('Num words: ' + str(len(words_freq)) + '\n')
@@ -171,22 +160,22 @@ def train(tfboard=False):
             f.write('{} {}\n'.format(cl[i], counts[i]))
         f.write('Avg doc len: ' + str(doc_len) + '\n')
 
-    with codecs.open('data_tensors/ldd_small_freq', mode='w', encoding='utf-8') as f:
+    with codecs.open('ldd_small_freq', mode='w', encoding='utf-8') as f:
         for word in freq:
             f.write('{} {}\n'.format(word, freq[word]))
 
-    with codecs.open('data_tensors/ldd_small', mode='w', encoding='utf-8') as f:
+    with codecs.open('ldd_small', mode='w', encoding='utf-8') as f:
         for i in range(len(trainset)):
             for word in trainset[i]:
                 f.write('{} '.format(word))
             f.write('\n')
 
-    with codecs.open('data_tensors/ldd_small_cls', mode='w', encoding='ascii') as f:
+    with codecs.open('ldd_small_cls', mode='w', encoding='ascii') as f:
         for i in cls:
             f.write('{}\n'.format(i))
 
     for window_size in range(window_max):
-        with codecs.open('data_tensors/ldd_small' + str(2 + window_size), mode='w', encoding='ascii') as f:
+        with codecs.open('ldd_small' + str(2 + window_size), mode='w', encoding='ascii') as f:
             for i in range(len(d_set[window_size])):
                 f.write(str(d_set[window_size][i]))
                 for s in s_set[window_size][i]:
